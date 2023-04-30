@@ -1,0 +1,263 @@
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+  xmlns:v="urn:schemas-microsoft-com:vml">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Google Maps JavaScript API プロトタイプ</title>
+  <!-- <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLlnA72YVYB5pw3Nx9AGub0Xx_ZNdu-9E&callback=initMap"></script> -->
+  <script src="./js/GMP.js" text/javascript"></script>
+  <script src="./js/click.js" text/javascript"></script>
+  <script src="./js/data_all.js" text/javascript"></script>
+  <script src="./js/w3.js"></script>
+  <link rel="stylesheet" href="./style.css">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  <script type="text/javascript" src="/content/lib/jquery/ui/jquery-ui-1.7.1.min.js"></script>
+  <script type="text/javascript" src="/content/lib/jquery/ui/ui.dropdownchecklist.js"></script> -->
+</head>
+
+<h1>
+  物流視覚化ツール プロトタイプ
+</h1>
+
+<body onload="initialize()">
+  <!-- <p>Google Maps APIを使ったサンプルです。</p> -->
+  <div id="position">
+    <div id="map_canvas"></div>
+    <form>
+      <b>出発地点</b>
+      <p>
+        <select id="start_locs" class="pref-select">
+          <optgroup label="北海道">
+            <option value="北海道">北海道</option>
+          </optgroup>
+          <optgroup label="東北">
+            <option value="青森県">青森県</option>
+            <option value="岩手県">岩手県</option>
+            <option value="宮城県">宮城県</option>
+            <option value="秋田県">秋田県</option>
+            <option value="山形県">山形県</option>
+            <option value="福島県">福島県</option>
+          </optgroup>
+          <optgroup label="関東">
+            <option value="茨城県">茨城県</option>
+            <option value="栃木県">栃木県</option>
+            <option value="群馬県">群馬県</option>
+            <option value="埼玉県">埼玉県</option>
+            <option value="千葉県">千葉県</option>
+            <option value="東京都">東京都</option>
+            <option value="神奈川県">神奈川県</option>
+          </optgroup>
+          <optgroup label="中部">
+            <option value="新潟県">新潟県</option>
+            <option value="富山県">富山県</option>
+            <option value="石川県">石川県</option>
+            <option value="福井県">福井県</option>
+            <option value="山梨県">山梨県</option>
+            <option value="長野県">長野県</option>
+            <option value="岐阜県">岐阜県</option>
+            <option value="静岡県">静岡県</option>
+            <option value="愛知県">愛知県</option>
+          </optgroup>
+          <optgroup label="近畿">
+            <option value="三重県">三重県</option>
+            <option value="滋賀県">滋賀県</option>
+            <option value="京都府">京都府</option>
+            <option value="大阪府">大阪府</option>
+            <option value="兵庫県">兵庫県</option>
+            <option value="奈良県">奈良県</option>
+            <option value="和歌山県">和歌山県</option>
+          </optgroup>
+          <optgroup label="中国">
+            <option value="鳥取県">鳥取県</option>
+            <option value="島根県">島根県</option>
+            <option value="岡山県">岡山県</option>
+            <option value="広島県">広島県</option>
+            <option value="山口県">山口県</option>
+          </optgroup>
+          <optgroup label="九州">
+            <option value="福岡県">福岡県</option>
+            <option value="佐賀県">佐賀県</option>
+            <option value="長崎県">長崎県</option>
+            <option value="大分県">大分県</option>
+            <option value="熊本県">熊本県</option>
+            <option value="宮崎県">宮崎県</option>
+            <option value="鹿児島県">鹿児島県</option>
+            <option value="沖縄県">沖縄県</option>
+          </optgroup>
+        </select>
+      </p>
+      <div style="width: 70%; text-align: right;">
+        地点フィルタ
+        <label>
+          <input type="text" id="start_text" name="start_text" placeholder="出発地点を入力">
+        </label>
+      </div><br>
+      <b>経由・納品地点</b>
+      <p>
+        <select id="end_locs" class="pref-select">
+          <optgroup label="北海道">
+            <option value="北海道">北海道</option>
+          </optgroup>
+          <optgroup label="東北">
+            <option value="青森県">青森県</option>
+            <option value="岩手県">岩手県</option>
+            <option value="宮城県">宮城県</option>
+            <option value="秋田県">秋田県</option>
+            <option value="山形県">山形県</option>
+            <option value="福島県">福島県</option>
+          </optgroup>
+          <optgroup label="関東">
+            <option value="茨城県">茨城県</option>
+            <option value="栃木県">栃木県</option>
+            <option value="群馬県">群馬県</option>
+            <option value="埼玉県">埼玉県</option>
+            <option value="千葉県">千葉県</option>
+            <option value="東京都">東京都</option>
+            <option value="神奈川県">神奈川県</option>
+          </optgroup>
+          <optgroup label="中部">
+            <option value="新潟県">新潟県</option>
+            <option value="富山県">富山県</option>
+            <option value="石川県">石川県</option>
+            <option value="福井県">福井県</option>
+            <option value="山梨県">山梨県</option>
+            <option value="長野県">長野県</option>
+            <option value="岐阜県">岐阜県</option>
+            <option value="静岡県">静岡県</option>
+            <option value="愛知県">愛知県</option>
+          </optgroup>
+          <optgroup label="近畿">
+            <option value="三重県">三重県</option>
+            <option value="滋賀県">滋賀県</option>
+            <option value="京都府">京都府</option>
+            <option value="大阪府">大阪府</option>
+            <option value="兵庫県">兵庫県</option>
+            <option value="奈良県">奈良県</option>
+            <option value="和歌山県">和歌山県</option>
+          </optgroup>
+          <optgroup label="中国">
+            <option value="鳥取県">鳥取県</option>
+            <option value="島根県">島根県</option>
+            <option value="岡山県">岡山県</option>
+            <option value="広島県">広島県</option>
+            <option value="山口県">山口県</option>
+          </optgroup>
+          <optgroup label="九州">
+            <option value="福岡県">福岡県</option>
+            <option value="佐賀県">佐賀県</option>
+            <option value="長崎県">長崎県</option>
+            <option value="大分県">大分県</option>
+            <option value="熊本県">熊本県</option>
+            <option value="宮崎県">宮崎県</option>
+            <option value="鹿児島県">鹿児島県</option>
+            <option value="沖縄県">沖縄県</option>
+          </optgroup>
+        </select>
+      </p>
+      <div style="width: 70%; text-align: right;">
+        地点フィルタ
+        <label>
+          <input type="text" id="end_text" name="end_text" placeholder="経由・目的地点を入力">
+        </label>
+      </div><br>
+      <b>温度帯</b>
+      <p>
+        <label><input type="checkbox" id="temp1" value="冷凍" />冷凍</label>
+        <label><input type="checkbox" id="temp2" value="冷蔵" />冷蔵</label>
+        <label><input type="checkbox" id="temp3" value="常温" />常温</label>
+      </p>
+      <b>時間</b>
+      <p>
+        <label><input type="checkbox" id="time1" value="10" />10時</label>
+        <label><input type="checkbox" id="time2" value="12" />12時</label>
+        <label><input type="checkbox" id="time3" value="13" />13時</label>
+        <label><input type="checkbox" id="time4" value="15" />15時</label>
+      </p>
+      <b>有料区間</b>
+      <p>
+        <label><input type="radio" name="pay" id="pay" value="false" checked>利用する</label>
+        <label><input type="radio" name="pay" id="pay" value="true">利用しない</label>
+      </p>
+      <!-- <b>最適化</b>
+      <p>
+        <label><input type="radio" name="optimize" id="optimize" value="true" checked>使用する</label>
+        <label><input type="radio" name="optimize" id="optimize" value="false" >使用しない</label>
+      </p> -->
+      <!-- </form> -->
+      <p><b>あいまい検索</b></p>
+      <!-- <form action="#" class="search-form-011"> -->
+      <!-- <button type="submit" aria-label="検索"></button> -->
+      <label>
+        <input type="text" id="location" name="location" placeholder="地点を入力">
+      </label>
+      <!-- </form> -->
+      <!-- <p><b>あいまいフィルタ</b><br> -->
+      <!-- <form action="#" class="search-form-011"> -->
+      <!-- 出発地点： -->
+      <!-- <button type="submit" aria-label="検索"></button> -->
+
+      <!-- </p> -->
+      <!-- <input type="text" id="start_text" name="start_text"><br> -->
+      <!-- 納品・経由地点： -->
+      <!-- <button type="submit" aria-label="検索"></button> -->
+
+      <!-- <input type="text" id="end_text" name="end_text"> -->
+      <!-- </form> -->
+      <!-- <form> -->
+      <input type="button" id="Search" value="検索" onclick="toSearch()" />
+    </form>
+  </div>
+</body>
+
+<body>
+  <!-- <input id="pac-input" class="controls" type="text" placeholder="Search Box" /> -->
+  <!-- <div id="map"></div> -->
+
+  <!-- 
+    The `defer` attribute causes the callback to execute after the full HTML
+    document has been parsed. For non-blocking uses, avoiding race conditions,
+    and consistent behavior across browsers, consider loading using Promises
+    with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLlnA72YVYB5pw3Nx9AGub0Xx_ZNdu-9E&callback=initAutocomplete&libraries=places&v=weekly"
+    defer></script>
+  <p id="result">
+  </p>
+  <table class="sorttbl" id="table">
+    <thead>
+      <tr>
+        <th style="width:3px"></th>
+        <th onclick="w3.sortHTML('#table','.item', 'td:nth-child(2)')">番号  ▲▼<i class="fa fa-sort"></i></th>
+        <th onclick="w3.sortHTML('#table','.item', 'td:nth-child(3)')">出発地点  ▲▼<i class="fa fa-sort"></i></th>
+        <th onclick="w3.sortHTML('#table','.item', 'td:nth-child(4)')">経由地1  ▲▼<i class="fa fa-sort"></i></th>
+        <th onclick="w3.sortHTML('#table','.item', 'td:nth-child(5)')">経由地2  ▲▼<i class="fa fa-sort"></i></th>
+        <th onclick="w3.sortHTML('#table','.item', 'td:nth-child(6)')">経由地3  ▲▼<i class="fa fa-sort"></i></th>
+        <th onclick="w3.sortHTML('#table','.item', 'td:nth-child(7)')">納品先  ▲▼<i class="fa fa-sort"></i></th>
+        <th onclick="w3.sortHTML('#table','.item', 'td:nth-child(8)')">出発時間  ▲▼<i class="fa fa-sort"></i></th>
+      </tr>
+    </thead>
+    <tbody id="myTableBody"></tbody>
+  </table>
+
+  <p id="response">
+  </p>
+
+  <!-- jQueryの読み込み -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+  </script>
+  <link href="./select_box/select2-4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="./select_box/select2-4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    $('.pref-select').select2({
+      multiple: true, //複数選択可能
+      closeOnSelect: false, //選択するたびに閉じないよう設定
+      language: 'ja' // Select2のメッセージに使用する言語を指定
+    });
+  </script>
+
+</body>
+
+</html>
