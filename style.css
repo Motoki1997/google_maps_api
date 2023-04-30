@@ -1,3 +1,37 @@
+/* 全体設定 */
+html {
+    /* background-color: #000; */
+}
+
+body {
+    /* min-height: 100vh; */
+    max-width: 90%;
+    /* background-color: papayawhip; */
+    margin: 0 auto;
+}
+
+/* 見出し */
+h2 {
+    position: relative;
+    padding: 1.5rem 1rem;
+    text-align: center;
+}
+
+h2:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    content: '';
+    background-image: -webkit-repeating-linear-gradient(135deg, #000, #000 1px, transparent 2px, transparent 5px);
+    background-image: repeating-linear-gradient(-45deg, #000, #000 1px, transparent 2px, transparent 5px);
+    background-size: 7px 7px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/*  */
 th,
 td {
     border: solid 1px;
@@ -33,14 +67,18 @@ th {
 }
 
 #map_canvas {
-    width: 55%;
+    width: 90%;
     height: 600px;
+    /* text-align: right; */
 }
 
 form {
     width: 40%;
 }
 
+svg{
+    vertical-align: center;
+}
 
 /* プルダウンチェックボックス */
 .select2-container {
@@ -51,6 +89,7 @@ form {
     position: relative;
     vertical-align: middle;
 }
+
 /* ---------------------------------------------- */
 /* 検索ボックス */
 .search-form-011 {
@@ -93,15 +132,17 @@ form {
     background-repeat: no-repeat;
     content: '';
 }
+
 /* ---------------------------------------------- */
 
 /*--- table css ---*/
-.sorttbl{
+.sorttbl {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
     display: table;
 }
+
 .sorttbl tr {
     display: table-row;
     vertical-align: inherit;
@@ -111,17 +152,117 @@ form {
 }
 
 .sorttbl th:first-child,
-.sorttbl td:first-child{
+.sorttbl td:first-child {
     padding-left: 16px;
 }
+
 .sorttbl td,
-.sorttbl th{
+.sorttbl th {
     padding: 8px 8px;
     display: table-cell;
     text-align: left;
     vertical-align: top;
 }
-.sorttbl th{
-    color: #fff!important;
-    background-color: #616161!important;
+
+.sorttbl th {
+    color: #fff !important;
+    background-color: #616161 !important;
+}
+
+section {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+
+/* ---------------------------------------------- */
+input.btn_03 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    position: relative;
+    background: #228bc8;
+    border: 1px solid #228bc8;
+    border-radius: 30px;
+    box-sizing: border-box;
+    padding: 0 45px 0 25px;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    line-height: 1.3;
+    text-align: left;
+    text-decoration: none;
+    transition-duration: 0.3s;
+}
+
+input.btn_03:before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border: 0;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    margin-top: -6px;
+}
+
+input.btn_03:hover {
+    background: #fff;
+    color: #228bc8;
+}
+
+input.btn_03:hover:before {
+    border-top: 2px solid #228bc8;
+    border-right: 2px solid #228bc8;
+}
+
+input.btn_02 {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    width: 120px;
+    /* margin: auto; */
+    /* padding: 1rem 4rem; */
+    font-weight: bold;
+    border: 2px solid #27acd9;
+    background: #27acd9;
+    color: #fff;
+    transition: 0.5s;
+}
+
+input.btn_02:hover {
+    color: #27acd9;
+    background: #fff;
+}
+
+/* 枠線 */
+.box26 {
+    position: relative;
+    margin: 2em 0;
+    padding: 1.5em 1em;
+    border: solid 3px #27acd9;
+    border-radius: 8px;
+    width: 70%;
+}
+.box26 .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 19px;
+    background: #FFF;
+    color: #27acd9;
+    font-weight: bold;
+}
+.box26 p {
+    margin: 0; 
+    padding: 0;
 }

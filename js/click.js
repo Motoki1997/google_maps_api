@@ -1,3 +1,6 @@
+// MIT License
+// Copyright (c) 2020-2023 Paweł Kuna
+
 var directionsService_dict = {}
 var directionsDisplay_dict = {}
 var Markers_dict = {}
